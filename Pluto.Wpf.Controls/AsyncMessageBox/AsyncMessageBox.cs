@@ -15,13 +15,8 @@ namespace Pluto.Wpf.Controls.AsyncMessageBox
     {
         public static void Show(string msg,string title="提示",string btnYes="确定")
         {
-            Thread thread = new Thread(() =>
-            {
-                var dlg = new MessageBoxForm(msg, title, btnYes);
-                dlg.ShowDialog();
-            });
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start();
+            var dlg = new MessageBoxForm(msg, title, btnYes);
+            dlg.Show();
         }
     }
 }
