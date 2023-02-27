@@ -13,6 +13,12 @@ namespace Pluto.Wpf.Controls.AsyncMessageBox
     /// </summary>
     public class AsyncMessageBox
     {
+        /// <summary>
+        /// 显示消息弹窗
+        /// </summary>
+        /// <param name="msg">消息</param>
+        /// <param name="title">弹窗标题</param>
+        /// <param name="btnYes">按钮文本</param>
         public static void Show(string msg,string title="提示",string btnYes="确定")
         {
             var dlg = new MessageBoxForm(msg, title, btnYes);

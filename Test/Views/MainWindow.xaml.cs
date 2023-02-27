@@ -13,8 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Test.ViewModels;
 
-namespace Test
+namespace Test.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -24,14 +25,8 @@ namespace Test
         public MainWindow()
         {
             InitializeComponent();
-        }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            AsyncMessageBox.Show("1111111111\n222222222222222\n333333333333333\n4444444444444444444444\n55555555555555555\n6666666666666"
-                , "出错了","确定");
-            AsyncMessageBox.Show("您确定吗？"
-                , "提示", "确定");
+            DataContext = new MainWindowViewModel();
         }
     }
 }

@@ -13,4 +13,21 @@
     <Copyright>© 2022 Pluto</Copyright>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Icons\关闭.png" />
+    <None Remove="Icons\右箭头.png" />
+    <None Remove="Icons\左箭头.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\关闭.png" />
+    <Resource Include="Icons\右箭头.png" />
+    <Resource Include="Icons\左箭头.png" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="Pluto.Wpf.Controls.Tab.CloseableTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pluto.Wpf.Controls.Tab" xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" Name="closeable_table"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <local:DoubleGridLengthConverter x:Key="DoubleGridLengthConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding TabHeight,ElementName=closeable_table, Converter={StaticResource DoubleGridLengthConverter}}"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="1" Click="LeftScroll">
+                <Image Source="/Pluto.Wpf.Controls;component/Icons/左箭头.png"></Image>
+            </Button>
+            <ScrollViewer x:Name="tab_Scroll" Grid.Column="1" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden">
+                <ItemsControl ItemsSource="{Binding Tabs, ElementName = closeable_table}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Margin="1" Width="{Binding TabWidth}" Command="{Binding ClickTab,ElementName=closeable_table}" 
+                                CommandParameter="{Binding Path=.}">
+                                <Grid Margin="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{Binding Header}" Grid.Column="0" VerticalContentAlignment="Center" 
+                                       HorizontalContentAlignment="Center">
+                                    </Label>
+                                    <Image Grid.Column="1" Source="/Pluto.Wpf.Controls;component/Icons/关闭.png">
+                                        <Behaviors:Interaction.Triggers>
+                                            <Behaviors:EventTrigger EventName="PreviewMouseDown">
+                                                <Behaviors:InvokeCommandAction Command="{Binding CloseTab,ElementName=closeable_table}" 
+                                                                           CommandParameter="{Binding Path=.}" />
+                                            </Behaviors:EventTrigger>
+                                        </Behaviors:Interaction.Triggers>
+                                    </Image>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            <Button Grid.Column="2" Margin="1" Click="RightScroll">
+                <Image Source="/Pluto.Wpf.Controls;component/Icons/右箭头.png"></Image>
+            </Button>
+        </Grid>
+        <Frame Content="{Binding SubPage,ElementName=closeable_table}" Grid.Row="1" NavigationUIVisibility="Hidden" Navigated="frame_Navigated" Navigating="frame_Navigating">
+            
+        </Frame>
+    </Grid>
+</UserControl>
