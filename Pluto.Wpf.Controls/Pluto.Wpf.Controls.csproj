@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0-windows;net6.0-windows</TargetFrameworks>
-    <Nullable>enable</Nullable>
+    <TargetFrameworks>net461;net470;net480;net5.0-windows;net6.0-windows</TargetFrameworks>
+    <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Version>1.0.1</Version>
@@ -11,6 +11,7 @@
     <Product>Pluto.Wpf.Controls</Product>
     <Description>Pluto.Wpf.Controls</Description>
     <Copyright>© 2022 Pluto</Copyright>
+    <PackageProjectUrl>https://gitee.com/pluto2015/pluto.-wpf.-controls</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Net.WebSockets;
 using System.Security.Policy;
@@ -27,8 +28,8 @@ namespace Pluto.Wpf.Controls.Tab
     public partial class CloseableTab : UserControl,INotifyPropertyChanged,INotifyPropertyChanging
     {
         #region events
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public event PropertyChangingEventHandler? PropertyChanging;
+        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangingEventHandler PropertyChanging;
         #endregion
         #region 依赖属性
 
@@ -62,6 +63,21 @@ namespace Pluto.Wpf.Controls.Tab
             DependencyProperty.Register("Tabs", typeof(ObservableCollection<Tab>), typeof(CloseableTab), 
                 new PropertyMetadata(new ObservableCollection<Tab>()));
 
+        public Tab Selected
+        {
+            get { return (Tab)GetValue(SelectedProperty); }
+            set { 
+                SetValue(SelectedProperty, value);
+                Tabs.Where(x => x == value).ToList().ForEach(x => x.Background = new SolidColorBrush(Colors.LightSkyBlue));
+                Tabs.Where(x => x != value).ToList().ForEach(x => x.Background = new SolidColorBrush(Colors.Transparent));
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedProperty =
+            DependencyProperty.Register("Selected", typeof(Tab), typeof(CloseableTab), new PropertyMetadata(new Tab()));
+
+
         #endregion
         #region props
         private Page _SubPage;
@@ -79,16 +95,17 @@ namespace Pluto.Wpf.Controls.Tab
             ClickTab = new RelayCommand<Tab>(OnClickTab);
         }
 
-        private void OnClickTab(Tab? obj)
+        private void OnClickTab(Tab obj)
         {
             if(obj == null)
             {
                 return;
             }
             SubPage = obj.ContentPage;
+            Selected = obj;
         }
 
-        private void OnCloseTab(Tab? obj)
+        private void OnCloseTab(Tab obj)
         {
             if(obj == null)
             {

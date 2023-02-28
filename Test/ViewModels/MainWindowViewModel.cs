@@ -41,7 +41,7 @@ namespace Test.ViewModels
             {
                 ContentPage = new System.Windows.Controls.Page(),
                 Header =$"tab{Tabs.Count+1}",
-                TabWidth = 200
+                TabWidth = 100
             });
         }
 
