@@ -8,6 +8,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using Test.Views;
 
 namespace Test.ViewModels
 {
@@ -37,9 +39,17 @@ namespace Test.ViewModels
 
         private void OnAddTabCMD()
         {
+            var list = new List<Page>
+            {
+                new Page1(),
+                new Page2(),
+            };
+
+            var random = new Random();
+
             Tabs.Add(new Tab
             {
-                ContentPage = new System.Windows.Controls.Page(),
+                ContentPage = list[random.Next(0,2)],
                 Header =$"tab{Tabs.Count+1}",
                 TabWidth = 100
             });

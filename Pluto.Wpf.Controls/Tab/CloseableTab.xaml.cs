@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Net.WebSockets;
+using System.Runtime.CompilerServices;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -140,7 +141,7 @@ namespace Pluto.Wpf.Controls.Tab
             if (frame != null )
             {
                 var page = frame.Content as Page;
-                if(page != null)
+                if(page != null&&page.DataContext!=null)
                 {
                     var vm = page.DataContext as IDisposable;
                     if(vm == null)
@@ -153,16 +154,16 @@ namespace Pluto.Wpf.Controls.Tab
             }
         }
 
-        private bool SetProperty<T>(ref T field,T newValue)
+        private bool SetProperty<T>(ref T field,T newValue, [CallerMemberName]string propertyName=null)
         {
             if(EqualityComparer<T>.Default.Equals(field,newValue))
             {
                 return false;
             }
 
-            PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(nameof(T)));
+            PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
             field = newValue;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(T)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
             return true;
         }
