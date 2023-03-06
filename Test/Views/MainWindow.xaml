@@ -16,8 +16,10 @@
             </TabItem>
             <TabItem Header="可关闭tab">
                 <Grid>
-                    <Tab:CloseableTab Tabs="{Binding Tabs}" BorderBrush="Silver" BorderThickness="1" Margin="10,48,10,10"/>
+                    <Tab:CloseableTab Tabs="{Binding Tabs}" Selected="{Binding SelectedTab}" BorderBrush="Silver" BorderThickness="1" Margin="10,48,10,10"/>
                     <Button Content="添加" Command="{Binding AddTabCMD}" BorderBrush="Silver" BorderThickness="1"  HorizontalAlignment="Left" Margin="33,10,0,0" VerticalAlignment="Top"/>
+                    <Button Content="选中" Command="{Binding SelectTabCMD}" CommandParameter="{Binding ElementName=selected_tab_name, Path=Text}"  HorizontalAlignment="Left" Margin="109,11,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="selected_tab_name" HorizontalAlignment="Left" Margin="142,12,0,0" TextWrapping="Wrap" Text="tab1" VerticalAlignment="Top" Width="120"/>
                 </Grid>
             </TabItem>
         </TabControl>

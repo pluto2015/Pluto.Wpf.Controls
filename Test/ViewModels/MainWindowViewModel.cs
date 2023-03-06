@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using Test.Views;
 
@@ -20,10 +21,18 @@ namespace Test.ViewModels
         /// 
         /// </summary>
         public ObservableCollection<Tab> Tabs { get; set; }= new ObservableCollection<Tab>();
+
+        private Tab _SelectedTab;
+        /// <summary>
+        /// 选中的tab
+        /// </summary>
+        public Tab SelectedTab { set => SetProperty(ref _SelectedTab, value); get => _SelectedTab; }
+
         #endregion
         #region commands
         public RelayCommand MessageCMD { set; get; }
         public RelayCommand AddTabCMD { set; get; }
+        public RelayCommand<string> SelectTabCMD { set; get; }
         #endregion
         #region methods
         public MainWindowViewModel()
@@ -35,6 +44,18 @@ namespace Test.ViewModels
         {
             MessageCMD = new RelayCommand(OnMessageCMD);
             AddTabCMD = new RelayCommand(OnAddTabCMD);
+            SelectTabCMD = new RelayCommand<string>(OnSelectTabCMD);
+        }
+
+        private void OnSelectTabCMD(string? obj)
+        {
+            if(!Tabs.Any(x=>x.Header == obj))
+            {
+                MessageBox.Show($"名称为:{obj}的tab不存在");
+                return;
+            }
+
+            SelectedTab = Tabs.FirstOrDefault(x => x.Header == obj);
         }
 
         private void OnAddTabCMD()

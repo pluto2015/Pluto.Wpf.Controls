@@ -67,16 +67,25 @@ namespace Pluto.Wpf.Controls.Tab
         public Tab Selected
         {
             get { return (Tab)GetValue(SelectedProperty); }
-            set { 
-                SetValue(SelectedProperty, value);
-                Tabs.Where(x => x == value).ToList().ForEach(x => x.Background = new SolidColorBrush(Colors.LightSkyBlue));
-                Tabs.Where(x => x != value).ToList().ForEach(x => x.Background = new SolidColorBrush(Colors.Transparent));
-            }
+            set { SetValue(SelectedProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedProperty =
-            DependencyProperty.Register("Selected", typeof(Tab), typeof(CloseableTab), new PropertyMetadata(new Tab()));
+            DependencyProperty.Register("Selected", typeof(Tab), typeof(CloseableTab), new PropertyMetadata(new Tab(),
+                (sender, e) => {
+                    var closeableTab = sender as CloseableTab;
+                    var newValue = e.NewValue as Tab;
+                    if(newValue != null)
+                    {
+                        closeableTab.Tabs.Where(x => x == newValue).ToList()
+                        .ForEach(x => x.Background = new SolidColorBrush(Colors.LightSkyBlue));
+                        closeableTab.Tabs.Where(x => x != newValue).ToList()
+                        .ForEach(x => x.Background = new SolidColorBrush(Colors.Transparent));
+
+                        closeableTab.SubPage = newValue.ContentPage;
+                    }
+                }));
 
 
         #endregion
@@ -102,7 +111,7 @@ namespace Pluto.Wpf.Controls.Tab
             {
                 return;
             }
-            SubPage = obj.ContentPage;
+
             Selected = obj;
         }
 

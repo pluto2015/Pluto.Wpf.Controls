@@ -5,14 +5,15 @@
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Company>Pluto</Company>
     <Title>Pluto.Wpf.Controls</Title>
     <Product>Pluto.Wpf.Controls</Product>
     <Description>Pluto.Wpf.Controls</Description>
     <Copyright>© 2023 Pluto</Copyright>
+    <Authors>Pluto</Authors>
     <PackageProjectUrl>https://gitee.com/pluto2015/pluto.-wpf.-controls</PackageProjectUrl>
-    <PackageReleaseNotes>增加可关闭TabControl</PackageReleaseNotes>
+    <PackageReleaseNotes>解决可关闭tab设置选中tab未生效问题</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
