@@ -14,6 +14,7 @@
     <Authors>Pluto</Authors>
     <PackageProjectUrl>https://gitee.com/pluto2015/pluto.-wpf.-controls</PackageProjectUrl>
     <PackageReleaseNotes>解决可关闭tab设置选中tab未生效问题</PackageReleaseNotes>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
