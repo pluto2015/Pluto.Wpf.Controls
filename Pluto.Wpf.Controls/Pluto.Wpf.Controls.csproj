@@ -5,7 +5,7 @@
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Company>Pluto</Company>
     <Title>Pluto.Wpf.Controls</Title>
     <Product>Pluto.Wpf.Controls</Product>
@@ -13,7 +13,7 @@
     <Copyright>© 2023 Pluto</Copyright>
     <Authors>Pluto</Authors>
     <PackageProjectUrl>https://gitee.com/pluto2015/pluto.-wpf.-controls</PackageProjectUrl>
-    <PackageReleaseNotes>解决可关闭tab设置选中tab未生效问题</PackageReleaseNotes>
+    <PackageReleaseNotes>解决可关闭tab点击tab后设置选中tab未生效问题</PackageReleaseNotes>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 

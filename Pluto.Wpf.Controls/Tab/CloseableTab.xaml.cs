@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Net.WebSockets;
 using System.Runtime.CompilerServices;
 using System.Security.Policy;
@@ -29,7 +30,13 @@ namespace Pluto.Wpf.Controls.Tab
     public partial class CloseableTab : UserControl,INotifyPropertyChanged,INotifyPropertyChanging
     {
         #region events
+        /// <summary>
+        /// 在属性修改后发生
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// 在属性修改时发生
+        /// </summary>
         public event PropertyChangingEventHandler PropertyChanging;
         #endregion
         #region 依赖属性
@@ -45,6 +52,9 @@ namespace Pluto.Wpf.Controls.Tab
             }
         }
 
+        /// <summary>
+        /// Tab高度
+        /// </summary>
         // Using a DependencyProperty as the backing store for TabHeight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TabHeightProperty =
             DependencyProperty.Register("TabHeight", typeof(double), typeof(CloseableTab), new PropertyMetadata((double)30));
@@ -59,20 +69,30 @@ namespace Pluto.Wpf.Controls.Tab
             set { SetValue(TabsProperty, value); }
         }
 
+        /// <summary>
+        /// 页面
+        /// </summary>
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TabsProperty =
             DependencyProperty.Register("Tabs", typeof(ObservableCollection<Tab>), typeof(CloseableTab), 
                 new PropertyMetadata(new ObservableCollection<Tab>()));
 
+        /// <summary>
+        /// 选中的页面
+        /// </summary>
         public Tab Selected
         {
             get { return (Tab)GetValue(SelectedProperty); }
             set { SetValue(SelectedProperty, value); }
         }
 
+        /// <summary>
+        /// 选中的页面
+        /// </summary>
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedProperty =
-            DependencyProperty.Register("Selected", typeof(Tab), typeof(CloseableTab), new PropertyMetadata(new Tab(),
+            DependencyProperty.Register("Selected", typeof(Tab), typeof(CloseableTab), new FrameworkPropertyMetadata(new Tab(),
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                 (sender, e) => {
                     var closeableTab = sender as CloseableTab;
                     var newValue = e.NewValue as Tab;
@@ -97,6 +117,9 @@ namespace Pluto.Wpf.Controls.Tab
         public RelayCommand<Tab> CloseTab { set; get; }
         public RelayCommand<Tab> ClickTab { set; get; }
         #endregion
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public CloseableTab()
         {
             InitializeComponent();
