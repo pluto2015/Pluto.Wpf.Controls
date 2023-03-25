@@ -140,19 +140,37 @@ namespace Pluto.Wpf.Controls.Tab
 
         private void OnCloseTab(Tab obj)
         {
-            if(obj == null)
+            try
             {
-                return;
-            }
+                if (obj == null)
+                {
+                    return;
+                }
 
-            Tabs.Remove(obj);
-            if(Tabs.Count > 0)
+                var page = obj.ContentPage;
+                if (page != null && page.DataContext != null)
+                {
+                    var vm = page.DataContext as IDisposable;
+                    if (vm == null)
+                    {
+                        throw new Exception("页面DataContext未实现IDisposable接口");
+                    }
+
+                    vm.Dispose();
+                }
+
+                Tabs.Remove(obj);
+                if (Tabs.Count > 0)
+                {
+                    OnClickTab(Tabs[0]);
+                }
+                else
+                {
+                    SubPage = null;
+                }
+            }catch(Exception ex)
             {
-                OnClickTab(Tabs[0]);
-            }
-            else
-            {
-                SubPage = null;
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -164,25 +182,6 @@ namespace Pluto.Wpf.Controls.Tab
                 //释放资源
                 frame.RemoveBackEntry();
                 GC.Collect();
-            }
-        }
-
-        private void frame_Navigating(object sender, NavigatingCancelEventArgs e)
-        {
-            var frame = sender as Frame;
-            if (frame != null )
-            {
-                var page = frame.Content as Page;
-                if(page != null&&page.DataContext!=null)
-                {
-                    var vm = page.DataContext as IDisposable;
-                    if(vm == null)
-                    {
-                        throw new Exception("页面DataContext未实现IDisposable接口");
-                    }
-
-                    vm.Dispose();
-                }
             }
         }
 

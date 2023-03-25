@@ -5,7 +5,7 @@
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Company>Pluto</Company>
     <Title>Pluto.Wpf.Controls</Title>
     <Product>Pluto.Wpf.Controls</Product>
@@ -13,14 +13,23 @@
     <Copyright>© 2023 Pluto</Copyright>
     <Authors>Pluto</Authors>
     <PackageProjectUrl>https://gitee.com/pluto2015/pluto.-wpf.-controls</PackageProjectUrl>
-    <PackageReleaseNotes>解决可关闭tab点击tab后设置选中tab未生效问题</PackageReleaseNotes>
+    <PackageReleaseNotes>可关闭tab关闭时释放资源</PackageReleaseNotes>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Icons\关闭.png" />
     <None Remove="Icons\右箭头.png" />
     <None Remove="Icons\左箭头.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

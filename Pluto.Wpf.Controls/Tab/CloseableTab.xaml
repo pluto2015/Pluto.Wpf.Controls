@@ -64,7 +64,7 @@
                 <Image Source="/Pluto.Wpf.Controls;component/Icons/右箭头.png"></Image>
             </Button>
         </Grid>
-        <Frame Content="{Binding SubPage,ElementName=closeable_table}" Grid.Row="1" NavigationUIVisibility="Hidden" Navigated="frame_Navigated" Navigating="frame_Navigating">
+        <Frame Content="{Binding SubPage,ElementName=closeable_table}" Grid.Row="1" NavigationUIVisibility="Hidden" Navigated="frame_Navigated">
             
         </Frame>
     </Grid>
